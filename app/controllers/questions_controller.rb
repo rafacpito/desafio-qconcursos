@@ -1,7 +1,7 @@
 class QuestionsController < ApplicationController
   def hottest
-    hottest_lister = QuestionManager::HottestLister.new(24.hours, params).execute
-    render json: hottest_lister, meta: pagination_meta(hottest_lister), each_serializer: QuestionAccessSerializer
+    hottest_lister = QuestionManager::TodayHottestQuestions.new(params).execute
+    render json: hottest_lister, meta: pagination_meta(hottest_lister), each_serializer: QuestionSerializer
   end
 
   def hottest_in_period
@@ -17,10 +17,8 @@ class QuestionsController < ApplicationController
       return 1.week
     when 'month'
       return 1.month
-    when 'year'
-      return 1.year
     else
-      return 24.hours
+      return 1.year
     end
   end
 end
