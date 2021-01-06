@@ -1,30 +1,30 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Para realizar a solução foi tomada as seguintes conclusões:
 
-Things you may want to cover:
+*  O campo daily_access em questions era referente aos acessos que a questão está tendo no dia atual;
+*  Para realizar a busca das questões mais procuradas em semana/mês/ano, foi utilizado o ultimo(a) semana/mes/ano;
 
-* Ruby version
+A solução foi feita da sequinte maneira:
 
-* System dependencies
+*  Ao rodar os seeds, é lido os arquivos jsons e salvo em um banco de dados as informações referentes a questões e seus acessos;
 
-* Configuration
+Após o banco estar populado, temos duas rotas, elas são:
 
-* Database creation
+*  hottest
 
-* Database initialization
+essa rota realiza a busca das questões mais quentes no dia e retorna uma listagem em ordem da mais acessada a menos accesada, não é necessário enviar nenhum parametro, mas é possivel enviar o parametro page para alterar a pagina exibida;
 
-* How to run the test suite
+*  hottest_in_period
 
-* Services (job queues, cache servers, search engines, etc.)
+essa rota realiza a busca das questões mais quentes no período informado, retornando uma listagem da quantidade de acessos no periodo e a questão que foi acessada, do mais acessado para o menos acessado, é necessário enviar o parametro period igual a week, month ou year, se não enviar nada, ele ira lidar como sendo year. Caso seja enviado week, ele buscara as questões mais acessadas de hoje ate uma semana atras, month de hoje ate um mês atras e de year de hoje ate um ano atras.
 
-* Deployment instructions
+# INSTALAÇÃO
 
-* ...
+Para rodar o projeto na sua maquina é necessário, após realizar o clone do projeto:
 
-* Rodar o docker para configurar o ambiente com o comando docker-compose build e subir ele com o comando docker-compose up
+*  Acessar o terminal e ir para a pasta do projeto;
+*  Rodar o seguinte comando: docker-compose build (isso se ja tiver com o docker e o docker-compose instalado no seu computador);
+*  Apos finalizado, rodar o comando: docker-compose up (demora bastante para importar as questoes e os acessos para o banco);
+*  Com isso o ambiente estará instalado corretamente e com a aplicação rodando no localhost:3001;
 
-* Acessar o container com o comando docker exec -it desafio_qconcursos_api bash
-
-* No container, rodar o comando bundle exec rails db:setup para criar o banco, rodar os migrates e as seeds
